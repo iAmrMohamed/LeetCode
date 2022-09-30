@@ -1,23 +1,24 @@
 class Solution {
     func lengthOfLongestSubstring(_ s: String) -> Int {
         let s = s.map { String($0) }
-    
+
+        var startIndex = 0
+        var currentSubstringMap = [String: Int]()
         var longestSubstringCount = 0
-        for i in 0..<s.count {
-            var currentSubstringSet = Set<String>()
-            currentSubstringSet.insert(s[i])
 
-            for j in i + 1..<s.count {
-                if currentSubstringSet.contains(s[j]) {
-                    break
-                } else {
-                    currentSubstringSet.insert(s[j])
+        for (index, character) in s.enumerated() {
+            if let currentIndex = currentSubstringMap[character] {
+                for j in startIndex...currentIndex {
+                    currentSubstringMap[s[j]] = nil
                 }
+
+                currentSubstringMap[character] = index
+                startIndex = currentIndex + 1
+            } else {
+                currentSubstringMap[character] = index
             }
 
-            if currentSubstringSet.count > longestSubstringCount {
-                longestSubstringCount = currentSubstringSet.count
-            }
+            longestSubstringCount = max(longestSubstringCount, currentSubstringMap.count)
         }
 
         return longestSubstringCount
