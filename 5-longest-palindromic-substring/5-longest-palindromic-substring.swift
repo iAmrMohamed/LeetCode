@@ -1,15 +1,15 @@
 class Solution {
     func isPalindrome(_ s:  [String]) -> Bool {
-        var l1 = s.startIndex
-        var l2 = s.endIndex - 1
+        var start = s.startIndex
+        var end = s.endIndex - 1
 
-        while l1 < l2 {
-            if s[l1] != s[l2] {
+        while start < end {
+            if s[start] != s[end] {
                 return false
             }
 
-            l1 += 1
-            l2 -= 1
+            start += 1
+            end -= 1
         }
 
         return true
@@ -22,8 +22,10 @@ class Solution {
 
         for i in 0..<array.count {
             var substring = [String]()
+
             for j in i..<array.count {
                 substring.append(array[j])
+
                 if isPalindrome(substring) {
                     if substring.count > result.count {
                         result = substring
