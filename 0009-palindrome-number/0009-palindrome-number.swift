@@ -1,19 +1,17 @@
 class Solution {
     func isPalindrome(_ x: Int) -> Bool {
-        let array = String(x).map { String($0) }
-        
-        var start = array.startIndex
-        var end = array.endIndex - 1
-        
-        while start < end {
-            if array[start] != array[end] {
-                return false
-            }
-            
-            start += 1
-            end -= 1
+        var x = x
+    
+        if x < 0 || (x % 10 == 0 && x != 0) {
+            return false
         }
-        
-        return true
+
+        var revertedNumber = 0
+        while x > revertedNumber {
+            revertedNumber = revertedNumber * 10 + x % 10
+            x /= 10
+        }
+
+        return x == revertedNumber || x == revertedNumber/10
     }
 }
