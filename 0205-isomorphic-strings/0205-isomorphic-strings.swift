@@ -7,20 +7,19 @@ class Solution {
         var map_t_s = [String: String]()
         
         for i in 0..<s.count {
-            if let c = map[s[i]], c != t[i] {
+            let sc = s[i]
+            let tc = t[i]
+            
+            if map[sc] == nil && map_t_s[tc] == nil {
+                map[sc] = tc
+                map_t_s[tc] = sc
+            } else if let c = map[sc], c != tc {
+                return false
+            } else if let c = map_t_s[tc], c != sc {
                 return false
             }
-            
-            if let c = map_t_s[t[i]], c != s[i] {
-                return false
-            }
-            
-            map[s[i]] = t[i]
-            map_t_s[t[i]] = s[i]
         }
-        
-        var mappedT = s.compactMap { map[$0] }
-        
-        return t == mappedT
+                
+        return true
     }
 }
