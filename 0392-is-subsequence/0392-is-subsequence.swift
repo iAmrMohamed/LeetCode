@@ -1,22 +1,22 @@
 class Solution {
     func isSubsequence(_ s: String, _ t: String) -> Bool {
-        let s = s.map { String($0) }
-        let t = t.map { String($0) }
-        
-        var answer = [String]()
-        
-        var sIndex = 0
-        var tIndex = 0
-        
-        while sIndex < s.count && tIndex < t.count {
-            if s[sIndex] == t[tIndex] {
-                answer += [s[sIndex]]
-                sIndex += 1
-            }
-            
-            tIndex += 1
+        if s.isEmpty {
+            return true
         }
         
-        return answer == s
+        var iterator = s.makeIterator()
+        var current = iterator.next()
+        
+        for c in t {
+            if c == current {
+                current = iterator.next()
+                
+                if current == nil {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
 }
