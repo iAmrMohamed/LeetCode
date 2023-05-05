@@ -16,8 +16,6 @@ class Solution : GuessGame {
             let mid = (left + right) / 2
             let result = guess(mid)
             
-            print("mid", mid, "result", result, "left", left, "right", right)
-            
             if result == 0 {
                 return mid
             } else if result == 1 {
